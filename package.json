@@ -1,0 +1,16 @@
+{
+  "name": "docker-watchdog",
+  "version": "1.0.0",
+  "description": "Monitora containers do docker e envia uma mensagem no slack.",
+  "main": "index.js",
+  "scripts": {
+    "run": "node ./index.js",
+    "test": "test"
+  },
+  "author": "Leonardo Falk",
+  "license": "MIT",
+  "dependencies": {
+    "node-docker-monitor": "^1.0.10",
+    "slack-notify": "^0.1.6"
+  }
+}

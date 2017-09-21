@@ -10,13 +10,7 @@ monitor({
       icon_url: 'https://www.docker.com/sites/default/files/vertical_large.png',
       username: 'Docker Guard',
       channel: '#rails-notifications',
-      text: `Container ${container.Names.join(' ')} esta executando no host ${HOST_NAME} :party_parrot:`,
-      fields: [
-        {
-          fallback: 'Dados do container',
-          fields: [container]
-        }
-      ]
+      text: `Container ${container.Names.join(' ')} esta executando no host ${HOST_NAME} :party_parrot:`
     });
   },
 
@@ -25,13 +19,7 @@ monitor({
       icon_url: 'https://www.docker.com/sites/default/files/vertical_large.png',
       username: 'Docker Guard',
       channel: '#rails-notifications',
-      text: `Container ${container.Names.join(' ')} parou de executar no host ${HOST_NAME} :fearful:`,
-      attachments: [
-        {
-          fallback: 'Dados do container',
-          fields: [container]
-        }
-      ]
+      text: `Container ${container.Names.join(' ')} parou de executar no host ${HOST_NAME} :fearful:`
     });
   }
 });

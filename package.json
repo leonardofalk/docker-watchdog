@@ -1,10 +1,10 @@
 {
   "name": "docker-watchdog",
   "version": "1.0.0",
-  "description": "Monitora containers do docker e envia uma mensagem no slack.",
+  "description": "Watches docker containers and send slack notifications when they go up/down.",
   "main": "index.js",
   "scripts": {
-    "run": "node ./index.js",
+    "start": "node ./index.js",
     "test": "test"
   },
   "author": "Leonardo Falk",

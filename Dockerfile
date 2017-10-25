@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8-alpine
 MAINTAINER Leonardo Falk <leonardo.falk@hotmail.com>
 
 ENV PROJECT_PATH $HOME/src/watchdog/

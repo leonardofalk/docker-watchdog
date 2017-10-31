@@ -12,7 +12,7 @@ const removeSlashes = name => {
 }
 
 const mapContainers = containers => {
-  return containers.split(/[^\w]+/i).map(container => container.toLowerCase())
+  return containers.split(/[^\w]+/i).map(container => container.toLowerCase());
 }
 
 const SELECTED_CONTAINERS = mapContainers(process.env.WATCHDOG_CONTAINERS || '');
@@ -21,24 +21,22 @@ const sendMessage = message => {
   return slack.send({icon_url: DOCKER_LOGO_PATH, username: USER_NAME, channel: SLACK_CHANNEL, text: message});
 }
 
+const onCallback = (container, docker, messageFormat) {
+  const name = removeSlashes(container.Names[0].toLowerCase());
+
+  if (SELECTED_CONTAINERS.length === 0 || SELECTED_CONTAINERS.indexOf(name)) {
+    const message = messageFormat.gsub(':name', name).gsub(':host', HOST_NAME);
+
+    sendMessage(message)
+  }
+}
+
 monitor({
   onContainerUp: function(container, docker) {
-    const name = removeSlashes(container.Names[0].toLowerCase())
-
-    if (SELECTED_CONTAINERS.length === 0 || SELECTED_CONTAINERS.indexOf(name)) {
-      const message = `Container ${name} is executing on host ${HOST_NAME}`
-
-      sendMessage(message)
-    }
+    onCallback(container, docker, 'Container :name is executing on host :host');
   },
 
   onContainerDown: function(container, docker) {
-    const name = removeSlashes(container.Names[0].toLowerCase())
-
-    if (SELECTED_CONTAINERS.length === 0 || SELECTED_CONTAINERS.indexOf(name)) {
-      const message = `Container ${name} stopped working on host ${HOST_NAME}`
-
-      sendMessage(message);
-    }
+    onCallback(container, docker, 'Container :name stopped working on host :host');
   }
 })
